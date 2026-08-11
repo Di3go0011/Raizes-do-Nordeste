@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raízes do Nordeste</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <style>
+        .style-card-unidade {
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .style-card-unidade:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12) !important;
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
+    <div class="container">
+        <a class="navbar-brand fw-bold" href="index.html">🌽 Raízes do Nordeste</a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="menu">
+            <ul class="navbar-nav ms-auto align-items-center">
+                <li class="nav-item"><a class="nav-link" href="#inicio">Início</a></li>
+                <li class="nav-item"><a class="nav-link" href="#secaoUnidades">Unidades</a></li>
+                <li class="nav-item me-lg-2">
+                    <button class="btn btn-sm btn-outline-dark" data-bs-toggle="modal" data-bs-target="#modalUnidade">
+                        <i class="fa-solid fa-location-dot text-warning"></i> <span id="unidadeSelecionada">Selecionar Unidade</span>
+                    </button>
+                </li>
+                <li class="nav-item"><a class="nav-link" href="#produtos">Produtos</a></li>
+                <li class="nav-item"><a class="nav-link" href="#combos">Combos</a></li>
+                <li class="nav-item"><a class="nav-link" href="#sobre">Sobre</a></li>
+                <li class="nav-item"><a class="nav-link" href="#contato">Contato</a></li>
+                <li class="nav-item ms-lg-3">
+                    <a href="html/carrinho.html" class="btn btn-outline-success position-relative">
+                        <i class="fa-solid fa-cart-shopping"></i> Carrinho
+                        <span id="contadorCarrinho" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">0</span>
+                    </a>
+                </li>
+                <li class="nav-item ms-lg-2" id="menu-usuario">
+                    <a href="html/login.html" class="btn btn-warning px-4">Login</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- CARD FIDELIDADE -->
+<div class="card border-0 shadow-sm rounded-4 p-3 mb-4 bg-white style-card-fidelidade" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#modalFidelidade">
+    <div class="d-flex align-items-center justify-content-between">
+        <div class="d-flex align-items-center gap-3">
+            <div class="bg-warning text-dark p-3 rounded-circle">
+                <i class="fa-solid fa-gift fa-xl"></i>
+            </div>
+            <div>
+                <h5 class="fw-bold mb-0">Programa de Fidelidade</h5>
+                <small class="text-muted">Clique para ver seus selos e prêmios</small>
+            </div>
+        </div>
+        <span class="badge bg-warning text-dark fw-bold px-3 py-2" id="badgeSelosTopo">0 / 5 Selos</span>
+    </div>
+</div>
+
+<!-- MODAL COM OS SELOS -->
+<div class="modal fade" id="modalFidelidade" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow rounded-4">
+            <div class="modal-header bg-warning text-dark">
+                <h5 class="modal-title fw-bold"><i class="fa-solid fa-ticket me-2"></i>Seu Cartão Fidelidade</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+            </div>
+            <div class="modal-body text-center p-4">
+                <p class="text-muted">A cada compra você ganha 1 selo. Junte 5 selos e ganhe 15% de desconto!</p>
+                
+                <!-- Grade de Selos -->
+                <div class="d-flex justify-content-between gap-2 my-4">
+                    <div class="p-3 border rounded-3 flex-fill" id="selo-1"><i class="fa-solid fa-ticket fa-2x text-muted"></i></div>
+                    <div class="p-3 border rounded-3 flex-fill" id="selo-2"><i class="fa-solid fa-ticket fa-2x text-muted"></i></div>
+                    <div class="p-3 border rounded-3 flex-fill" id="selo-3"><i class="fa-solid fa-ticket fa-2x text-muted"></i></div>
+                    <div class="p-3 border rounded-3 flex-fill" id="selo-4"><i class="fa-solid fa-ticket fa-2x text-muted"></i></div>
+                    <div class="p-3 border rounded-3 flex-fill" id="selo-5"><i class="fa-solid fa-gift fa-2x text-muted"></i></div>
+                </div>
+
+                <div id="alertaDescontoModal" class="alert alert-success d-none mb-0" role="alert">
+                    🎉 **Parabéns!** Você tem 5 selos! Seu desconto de 15% será aplicado no próximo pedido.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="inicio">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <h1>O verdadeiro sabor do <span>Cuscuz Nordestino</span></h1>
+                <p>Tradição, qualidade e muito sabor. Receitas típicas preparadas com ingredientes frescos.</p>
+                <a href="#secaoUnidades" class="btn btn-warning btn-lg">Ver Cardápio</a>
+            </div>
+            <div class="col-lg-6 text-center">
+                <img src="imagens/cuscuz.png" class="img-fluid hero-img" alt="Cuscuz nordestino">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SEÇÃO DE SELEÇÃO DE UNIDADES -->
+<section id="secaoUnidades" class="py-5 bg-light">
+    <div class="container">
+        <div class="text-center mb-4">
+            <h2 class="fw-bold">Selecione a Unidade para o Pedido</h2>
+            <p class="text-muted">A disponibilidade dos pratos altera conforme a região escolhida.</p>
+        </div>
+
+        <div class="row g-4">
+            <!-- Recife -->
+            <div class="col-md-4">
+                <div class="card border-0 shadow-sm rounded-4 overflow-hidden h-100 style-card-unidade" onclick="filtrarUnidade('recife', 'Recife - Boa Viagem')">
+                    <img src="https://images.unsplash.com/photo-1590523741831-ab7e8b8f9c7f?auto=format&fit=crop&w=600&q=80" class="card-img-top" height="180" style="object-fit: cover;" alt="Recife">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <h5 class="card-title fw-bold mb-0">Recife - Boa Viagem</h5>
+                            <span class="badge bg-success">Aberta</span>
+                        </div>
+                        <p class="text-muted small mb-2">Av. Conselheiro Aguiar, 1440 • Boa Viagem</p>
+                        <div class="d-flex gap-2 flex-wrap mb-3">
+                            <span class="badge bg-light text-dark border">Nota 4.8</span>
+                            <span class="badge bg-light text-dark border">Preparo 20 a 30 min</span>
+                            <span class="badge bg-light text-dark border">Frete R$ 7,90</span>
+                        </div>
+                        <ul class="list-unstyled small text-muted mb-0">
+                            <li>• Cardápio Completo</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Olinda -->
+            <div class="col-md-4">
+                <div class="card border-0 shadow-sm rounded-4 overflow-hidden h-100 style-card-unidade" onclick="filtrarUnidade('olinda', 'Olinda - Carmo')">
+                    <img src="https://www.maladeaventuras.com/wp-content/uploads/2020/07/igreja-da-se-olinda.jpg"class="card-img-top" height="180" style="object-fit: cover;" alt="Olinda">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <h5 class="card-title fw-bold mb-0">Olinda - Carmo</h5>
+                            <span class="badge bg-success">Aberta</span>
+                        </div>
+                        <p class="text-muted small mb-2">Praça do Carmo, 100 • Carmo</p>
+                        <div class="d-flex gap-2 flex-wrap mb-3">
+                            <span class="badge bg-light text-dark border">Nota 4.9</span>
+                            <span class="badge bg-light text-dark border">Preparo 25 a 35 min</span>
+                            <span class="badge bg-light text-dark border">Frete R$ 6,50</span>
+                        </div>
+                        <ul class="list-unstyled small text-muted mb-0">
+                            <li>• Cuscuz Recheado & Sucos</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Jaboatão -->
+            <div class="col-md-4">
+                <div class="card border-0 shadow-sm rounded-4 overflow-hidden h-100 style-card-unidade" onclick="filtrarUnidade('jaboatao', 'Jaboatão - Piedade')">
+                    <img src="https://images.unsplash.com/photo-1512100356356-de1b84283e18?auto=format&fit=crop&w=600&q=80" class="card-img-top" height="180" style="object-fit: cover;" alt="Jaboatão">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <h5 class="card-title fw-bold mb-0">Jaboatão - Piedade</h5>
+                            <span class="badge bg-success">Aberta</span>
+                        </div>
+                        <p class="text-muted small mb-2">Av. Bernardo Vieira de Melo, 2200</p>
+                        <div class="d-flex gap-2 flex-wrap mb-3">
+                            <span class="badge bg-light text-dark border">Nota 4.7</span>
+                            <span class="badge bg-light text-dark border">Preparo 20 a 30 min</span>
+                            <span class="badge bg-light text-dark border">Frete R$ 8,00</span>
+                        </div>
+                        <ul class="list-unstyled small text-muted mb-0">
+                            <li>• Pratos Selecionados</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SEÇÃO PRODUTOS -->
+<section id="produtos" class="py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 id="tituloCardapio">Nossos Produtos</h2>
+            <p id="subtituloCardapio">Selecione uma unidade acima para ver a disponibilidade na sua região.</p>
+        </div>
+
+        <div class="row">
+            <!-- Cuscuz Recheado (Disponível em Recife, Olinda e Jaboatão) -->
+            <div class="col-lg-6 mb-4 item-produto" data-unidade="recife olinda jaboatao">
+                <div class="card produto-card h-100 shadow-sm">
+                    <div class="row g-0 h-100">
+                        <div class="col-md-4">
+                            <img src="imagens/cuscuzr.png" class="img-fluid rounded-start h-100" style="object-fit: cover;" alt="Cuscuz Recheado">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body d-flex flex-column justify-content-between h-100">
+                                <div>
+                                    <h4 class="fw-bold">Cuscuz Recheado</h4>
+                                    <p class="text-muted small">Carne de sol, queijo coalho e manteiga da terra.</p>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <h5 class="text-warning fw-bold mb-0">R$ 25,00</h5>
+                                    <button class="btn btn-warning text-white" onclick="adicionarAoCarrinho('Cuscuz Recheado', 25.00)">Adicionar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tapioca (Disponível em Recife e Jaboatão, NÃO tem em Olinda) -->
+            <div class="col-lg-6 mb-4 item-produto" data-unidade="recife jaboatao">
+                <div class="card produto-card h-100 shadow-sm">
+                    <div class="row g-0 h-100">
+                        <div class="col-md-4">
+                            <img src="imagens/tapioca.png" class="img-fluid rounded-start h-100" style="object-fit: cover;" alt="Tapioca Especial">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body d-flex flex-column justify-content-between h-100">
+                                <div>
+                                    <h4 class="fw-bold">Tapioca Especial</h4>
+                                    <p class="text-muted small">Recheada com queijo, presunto e catupiry.</p>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <h5 class="text-warning fw-bold mb-0">R$ 18,00</h5>
+                                    <button class="btn btn-warning text-white" onclick="adicionarAoCarrinho('Tapioca Especial', 18.00)">Adicionar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bolo de Macaxeira (Apenas Recife e Jaboatão) -->
+            <div class="col-lg-6 mb-4 item-produto" data-unidade="recife jaboatao">
+                <div class="card produto-card h-100 shadow-sm">
+                    <div class="row g-0 h-100">
+                        <div class="col-md-4">
+                            <img src="imagens/bolo.png" class="img-fluid rounded-start h-100" style="object-fit: cover;" alt="Bolo de Macaxeira">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body d-flex flex-column justify-content-between h-100">
+                                <div>
+                                    <h4 class="fw-bold">Bolo de Macaxeira</h4>
+                                    <p class="text-muted small">Tradicional fatia macia e cremosa de bolo de mandioca.</p>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <h5 class="text-warning fw-bold mb-0">R$ 15,00</h5>
+                                    <button class="btn btn-warning text-white" onclick="adicionarAoCarrinho('Bolo de Macaxeira', 15.00)">Adicionar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sucos Regionais (Disponível em Recife, Olinda e Jaboatão) -->
+            <div class="col-lg-6 mb-4 item-produto" data-unidade="recife olinda jaboatao">
+                <div class="card produto-card h-100 shadow-sm">
+                    <div class="row g-0 h-100">
+                        <div class="col-md-4">
+                            <img src="imagens/sucos.png" class="img-fluid rounded-start h-100" style="object-fit: cover;" alt="Sucos Regionais">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body d-flex flex-column justify-content-between h-100">
+                                <div>
+                                    <h4 class="fw-bold">Sucos Regionais</h4>
+                                    <p class="text-muted small">Cajá, acerola, graviola ou caju (500ml).</p>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <h5 class="text-warning fw-bold mb-0">R$ 12,00</h5>
+                                    <button class="btn btn-warning text-white" onclick="adicionarAoCarrinho('Sucos Regionais', 12.00)">Adicionar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Café da Manhã (Apenas Recife) -->
+            <div class="col-lg-6 mb-4 item-produto" data-unidade="recife">
+                <div class="card produto-card h-100 shadow-sm">
+                    <div class="row g-0 h-100">
+                        <div class="col-md-4">
+                            <img src="imagens/cafe.png" class="img-fluid rounded-start h-100" style="object-fit: cover;" alt="Café da Manhã Completo">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body d-flex flex-column justify-content-between h-100">
+                                <div>
+                                    <h4 class="fw-bold">Café da Manhã Completo</h4>
+                                    <p class="text-muted small">Cuscuz, ovos mexidos, queijo coalho e café passado.</p>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <h5 class="text-warning fw-bold mb-0">R$ 35,00</h5>
+                                    <button class="btn btn-warning text-white" onclick="adicionarAoCarrinho('Café da Manhã Completo', 35.00)">Adicionar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- COMBOS -->
+<section class="combos py-5 bg-light" id="combos">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2>Combos Especiais</h2>
+            <p>Economize escolhendo nossos combos.</p>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-4 mb-4">
+                <div class="combo text-center p-4 shadow-sm rounded bg-white h-100">
+                    <i class="fa-solid fa-users fa-3x text-warning mb-3"></i>
+                    <h3>Combo Família</h3>
+                    <p>2 Cuscuz + 2 Tapiocas + 4 Sucos Naturais.</p>
+                    <h2 class="text-warning">R$ 95,00</h2>
+                    <button class="btn btn-warning text-white w-100 mt-3" onclick="adicionarAoCarrinho('Combo Família', 95)">Adicionar</button>
+                </div>
+            </div>
+
+            <div class="col-lg-4 mb-4">
+                <div class="combo text-center p-4 shadow-sm rounded bg-white h-100">
+                    <i class="fa-solid fa-mug-hot fa-3x text-warning mb-3"></i>
+                    <h3>Combo Café</h3>
+                    <p>Café, bolo, cuscuz e suco natural.</p>
+                    <h2 class="text-warning">R$ 39,90</h2>
+                    <button class="btn btn-warning text-white w-100 mt-3" onclick="adicionarAoCarrinho('Combo Café', 39.9)">Adicionar</button>
+                </div>
+            </div>
+
+            <div class="col-lg-4 mb-4">
+                <div class="combo text-center p-4 shadow-sm rounded bg-white h-100">
+                    <i class="fa-solid fa-heart fa-3x text-warning mb-3"></i>
+                    <h3>Combo Casal</h3>
+                    <p>2 Tapiocas + 2 Sucos + 1 Bolo.</p>
+                    <h2 class="text-warning">R$ 55,00</h2>
+                    <button class="btn btn-warning text-white w-100 mt-3" onclick="adicionarAoCarrinho('Combo Casal', 55)">Adicionar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SOBRE -->
+<section class="sobre py-5" id="sobre">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 mb-4">
+                <img src="imagens/cuscuz.png" class="img-fluid rounded shadow" alt="Cuscuz">
+            </div>
+            <div class="col-lg-6">
+                <h2>Sobre Nós</h2>
+                <p>O <strong>Raízes do Nordeste</strong> nasceu com a missão de preservar os sabores tradicionais da culinária nordestina.</p>
+                <p>Trabalhamos diariamente com ingredientes frescos, receitas caseiras e atendimento de qualidade, proporcionando uma experiência única aos nossos clientes.</p>
+                <a href="#produtos" class="btn btn-warning text-white">Conheça o Cardápio</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- DEPOIMENTOS -->
+<section class="depoimentos py-5 bg-light">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2>O que nossos clientes dizem</h2>
+            <p>Quem prova, sempre volta!</p>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 mb-4">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-body text-center">
+                        <img src="imagens/cliente1.png" class="rounded-circle mb-3" width="90" height="90" alt="Cliente">
+                        <h5>Maria Silva</h5>
+                        <div class="text-warning fs-5 mb-2">★★★★★</div>
+                        <p>O melhor cuscuz que já experimentei. Atendimento excelente e entrega muito rápida.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 mb-4">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-body text-center">
+                        <img src="imagens/cliente2.png" class="rounded-circle mb-3" width="90" height="90" alt="Cliente">
+                        <h5>José Oliveira</h5>
+                        <div class="text-warning fs-5 mb-2">★★★★★</div>
+                        <p>Sempre peço o Combo Família. Tudo chega quentinho e muito saboroso.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 mb-4">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-body text-center">
+                        <img src="imagens/cliente3.png" class="rounded-circle mb-3" width="90" height="90" alt="Cliente">
+                        <h5>Mário</h5>
+                        <div class="text-warning fs-5 mb-2">★★★★★</div>
+                        <p>O café da manhã é maravilhoso. Super recomendo para toda a família.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CONTATO -->
+<section class="contato py-5" id="contato">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2>Entre em Contato</h2>
+            <p>Estamos esperando sua visita!</p>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-7">
+                <div class="card shadow-sm border-0 p-4">
+                    <p><i class="fa-solid fa-location-dot text-warning me-2"></i> Rua das Flores, 250 - Recife / PE</p>
+                    <p><i class="fa-solid fa-phone text-warning me-2"></i> (81) 99999-9999</p>
+                    <p><i class="fa-solid fa-envelope text-warning me-2"></i> contato@raizesdonordeste.com.br</p>
+                    <p><i class="fa-brands fa-instagram text-warning me-2"></i> @raizesdonordeste</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer py-4 bg-dark text-white">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 mb-4">
+                <h4>🌽 Raízes do Nordeste</h4>
+                <p>Tradição e sabor nordestino em cada pedido.</p>
+            </div>
+            <div class="col-lg-4 mb-4">
+                <h5>Atendimento</h5>
+                <ul class="list-unstyled">
+                    <li><a href="html/pagamento.html" class="text-white-50">Formas de pagamento</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-4">
+                <h5>Fale conosco</h5>
+                <p class="mb-1"><i class="fa-solid fa-phone me-2"></i>(81) 99999-9999</p>
+                <p class="mb-1"><i class="fa-solid fa-envelope me-2"></i>contato@raizesdonordeste.com.br</p>
+                <div class="mt-2">
+                    <a href="#" class="text-white me-2"><i class="fab fa-facebook"></i></a>
+                    <a href="#" class="text-white me-2"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="text-white"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+        </div>
+        <hr class="bg-secondary">
+        <div class="text-center text-white-50">© 2026 Raízes do Nordeste - Todos os direitos reservados.</div>
+    </div>
+</footer>
+
+<!-- MODAL DE SELEÇÃO DE UNIDADE -->
+<div class="modal fade" id="modalUnidade" tabindex="-1" aria-labelledby="modalUnidadeLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-warning text-dark">
+                <h5 class="modal-title fw-bold" id="modalUnidadeLabel"><i class="fa-solid fa-location-dot me-2"></i>Selecione sua Região/Unidade</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+            </div>
+            <div class="modal-body text-center">
+                <p class="mb-3">Escolha a unidade mais próxima de você para verificar os produtos e a disponibilidade do cardápio:</p>
+                <div class="d-grid gap-2">
+                    <button class="btn btn-outline-warning text-dark fw-bold py-2" onclick="filtrarUnidade('recife', 'Recife - Boa Viagem')">
+                        <i class="fa-solid fa-store me-2"></i> Recife - Boa Viagem
+                    </button>
+                    <button class="btn btn-outline-warning text-dark fw-bold py-2" onclick="filtrarUnidade('olinda', 'Olinda - Carmo')">
+                        <i class="fa-solid fa-store me-2"></i> Olinda - Carmo
+                    </button>
+                    <button class="btn btn-outline-warning text-dark fw-bold py-2" onclick="filtrarUnidade('jaboatao', 'Jaboatão - Piedade')">
+                        <i class="fa-solid fa-store me-2"></i> Jaboatão - Piedade
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- BANNER LGPD -->
+<div id="lgpdBanner" class="fixed-bottom bg-dark text-white p-3 shadow-lg" style="display: none; z-index: 1055;">
+    <div class="container d-flex flex-column flex-md-row align-items-center justify-content-between gap-3">
+        <p class="small mb-0">
+            Utilizamos cookies e coletamos seus dados de navegação e pedido para personalizar sua experiência e processar suas compras, em conformidade com a <strong>LGPD (Lei Geral de Proteção de Dados)</strong>. Ao continuar, você concorda com a nossa <a href="html/privacidade.html" class="text-warning text-decoration-underline">Política de Privacidade</a>.
+        </p>
+        <button id="btnAceitarLGPD" class="btn btn-warning btn-sm px-4 fw-bold text-nowrap">Aceitar e Continuar</button>
+    </div>
+</div>
+
+<!-- BOTÕES FLUTUANTES -->
+<a href="https://wa.me/5581999999999" class="whatsapp" target="_blank" aria-label="WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+</a>
+<button id="topo" aria-label="Voltar ao topo"><i class="fa-solid fa-arrow-up"></i></button>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/carrinho.js"></script>
+<script>
+document.getElementById("topo").addEventListener("click", () => window.scrollTo({top:0, behavior:"smooth"}));
+
+// Função de Filtragem de Unidade
+function filtrarUnidade(siglaUnidade, nomeExibicao) {
+    // Save no LocalStorage
+    localStorage.setItem("unidadeSelecionada", nomeExibicao);
+    localStorage.setItem("siglaUnidadeSelecionada", siglaUnidade);
+    
+    // Atualiza botão da Navbar e título do Cardápio
+    document.getElementById("unidadeSelecionada").innerText = nomeExibicao;
+    document.getElementById("tituloCardapio").innerText = "Cardápio: " + nomeExibicao;
+    document.getElementById("subtituloCardapio").innerText = "Exibindo os itens disponíveis para entrega nesta região.";
+
+    // Esconde / Mostra itens do cardápio
+    const produtos = document.querySelectorAll(".item-produto");
+    produtos.forEach(prod => {
+        const unidadesPermitidas = prod.getAttribute("data-unidade").split(" ");
+        if (unidadesPermitidas.includes(siglaUnidade)) {
+            prod.style.display = "block";
+        } else {
+            prod.style.display = "none";
+        }
+    });
+
+    // Fechar modal caso esteja aberto
+    const modalEl = document.getElementById('modalUnidade');
+    const modal = bootstrap.Modal.getInstance(modalEl);
+    if(modal) modal.hide();
+
+    // Rola a tela até os produtos
+    document.getElementById("produtos").scrollIntoView({ behavior: 'smooth' });
+}
+
+// Inicialização
+document.addEventListener("DOMContentLoaded", () => {
+    // Carregar unidade salva previamente
+    const unidadeSalva = localStorage.getItem("unidadeSelecionada");
+    const siglaSalva = localStorage.getItem("siglaUnidadeSelecionada");
+    
+    if (unidadeSalva && siglaSalva) {
+        filtrarUnidade(siglaSalva, unidadeSalva);
+    }
+
+    // Banner LGPD
+    if (!localStorage.getItem("lgpdAceito")) {
+        document.getElementById("lgpdBanner").style.display = "block";
+    }
+
+    document.getElementById("btnAceitarLGPD")?.addEventListener("click", () => {
+        localStorage.setItem("lgpdAceito", "true");
+        document.getElementById("lgpdBanner").style.display = "none";
+    });
+});
+</script>
+</body>
+</html>

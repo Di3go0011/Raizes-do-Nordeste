@@ -1,0 +1,3 @@
+body, .auth-box { min-height:100vh; }
+body { background:#f8f9fa; display:flex; align-items:center; justify-content:center; padding:25px; }
+.auth-box { width:100%; max-width:500px; background:#fff; padding:32px; border-radius:14px; box-shadow:0 8px 30px rgba(0,0,0,.08); min-height:auto; }

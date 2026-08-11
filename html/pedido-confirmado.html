@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pedido Confirmado</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="css/paginas.css">
+</head>
+<body>
+<nav class="navbar navbar-light bg-white shadow-sm"><div class="container"><a class="navbar-brand fw-bold" href="index.html">🌽 Raízes do Nordeste</a></div></nav>
+<main class="container py-5">
+<div class="page-card text-center">
+<div class="display-1">✅</div>
+<h1>Pedido confirmado!</h1>
+<p class="lead">Obrigado pela sua compra.</p>
+<p>Número do pedido: <strong id="numeroPedido">---</strong></p>
+<p>Seu pedido foi registrado no sistema.</p>
+<a href="index.html" class="btn btn-warning">Voltar ao início</a>
+</div>
+</main>
+<script>
+const pedido = JSON.parse(localStorage.getItem("ultimoPedido"));
+if (pedido) document.getElementById("numeroPedido").textContent = pedido.numero;
+</script>
+</body>
+</html>
